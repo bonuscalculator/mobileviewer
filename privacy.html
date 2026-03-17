@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy – MobileViewer</title>
+  <meta name="description" content="MobileViewer Privacy Policy. Learn how we collect, use, and protect your information when you use our free mobile website preview tool." />
+  <link rel="canonical" href="https://mobileviewer.vercel.app/privacy.html" />
+  <meta property="og:title" content="Privacy Policy – MobileViewer" />
+  <meta property="og:description" content="Our commitment to your privacy. MobileViewer runs client-side and collects minimal data." />
+  <meta property="og:url" content="https://mobileviewer.vercel.app/privacy.html" />
+  <meta name="robots" content="index, follow" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Privacy Policy",
+    "url": "https://mobileviewer.vercel.app/privacy.html",
+    "description": "Privacy Policy for MobileViewer — a free browser-based mobile device simulator.",
+    "isPartOf": { "@type": "WebSite", "name": "MobileViewer", "url": "https://mobileviewer.vercel.app" },
+    "dateModified": "2025-01-01"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:#080c10; --bg2:#0d1117; --bg3:#111820;
+      --surface:#151d28; --surface2:#1c2636;
+      --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.12);
+      --accent:#00e5ff; --accent2:#7b61ff; --green:#00ff88;
+      --text:#e8edf2; --text2:#8fa3b8; --text3:#4d6070;
+      --radius:16px; --radius-sm:8px;
+      --font-display:'Syne',sans-serif; --font-body:'DM Sans',sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background:var(--bg); color:var(--text); font-family:var(--font-body); font-size:16px; line-height:1.7; overflow-x:hidden; }
+    body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:9999; opacity:0.4; }
+    ::-webkit-scrollbar { width:5px; } ::-webkit-scrollbar-track { background:var(--bg); } ::-webkit-scrollbar-thumb { background:var(--surface2); border-radius:10px; }
+    .container { max-width:800px; margin:0 auto; padding:0 24px; }
+    .container-wide { max-width:1100px; margin:0 auto; padding:0 24px; }
+    h1,h2,h3,h4 { font-family:var(--font-display); font-weight:700; line-height:1.2; }
+    h1 { font-size:clamp(2rem,5vw,3.2rem); font-weight:800; }
+    h2 { font-size:1.4rem; margin:48px 0 14px; color:var(--text); }
+    h3 { font-size:1.1rem; margin:28px 0 10px; color:var(--text); }
+    p { color:var(--text2); margin-bottom:16px; }
+    ul,ol { color:var(--text2); padding-left:20px; margin-bottom:16px; }
+    li { margin-bottom:8px; }
+    a { color:var(--accent); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    strong { color:var(--text); font-weight:600; }
+
+    /* NAV */
+    nav { position:sticky; top:0; z-index:100; background:rgba(8,12,16,0.85); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); }
+    .nav-inner { display:flex; align-items:center; justify-content:space-between; padding:18px 0; }
+    .logo { font-family:var(--font-display); font-size:1.25rem; font-weight:800; color:var(--text); text-decoration:none; display:flex; align-items:center; gap:10px; }
+    .logo-icon { width:32px; height:32px; border-radius:9px; background:linear-gradient(135deg,var(--accent),var(--accent2)); display:flex; align-items:center; justify-content:center; }
+    .logo-icon svg { width:16px; height:16px; }
+    .nav-back { display:flex; align-items:center; gap:8px; font-size:0.88rem; color:var(--text2); text-decoration:none; border:1px solid var(--border2); border-radius:100px; padding:7px 16px; transition:all 0.2s; font-family:var(--font-display); font-weight:600; }
+    .nav-back:hover { color:var(--accent); border-color:var(--accent); text-decoration:none; }
+
+    /* PAGE HERO */
+    .page-hero { padding:80px 0 60px; border-bottom:1px solid var(--border); position:relative; overflow:hidden; }
+    .page-hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 50% 0%, rgba(0,229,255,0.06) 0%, transparent 70%); pointer-events:none; }
+    .page-hero-grid { position:absolute; inset:0; background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px); background-size:60px 60px; mask-image:radial-gradient(ellipse 60% 50% at 50% 0%,black,transparent); }
+    .page-hero-inner { position:relative; }
+    .tag { display:inline-flex; align-items:center; gap:6px; font-family:var(--font-display); font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); padding:5px 12px; border:1px solid rgba(0,229,255,0.25); border-radius:100px; background:rgba(0,229,255,0.06); margin-bottom:20px; }
+    .page-hero h1 { margin-bottom:14px; }
+    .gradient-text { background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 60%,#ff6b6b 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .page-meta { display:flex; align-items:center; gap:20px; margin-top:24px; flex-wrap:wrap; }
+    .page-meta-item { display:flex; align-items:center; gap:8px; font-size:0.82rem; color:var(--text3); font-family:var(--font-display); }
+    .page-meta-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); }
+
+    /* CONTENT */
+    .page-content { padding:60px 0 100px; }
+    .prose { }
+    .prose h2 { border-top:1px solid var(--border); padding-top:40px; }
+    .prose h2:first-child { border-top:none; padding-top:0; }
+
+    .info-card { background:var(--surface); border:1px solid var(--border2); border-radius:var(--radius); padding:24px 28px; margin:24px 0; }
+    .info-card.accent { border-color:rgba(0,229,255,0.25); background:rgba(0,229,255,0.04); }
+    .info-card.warning { border-color:rgba(255,107,107,0.25); background:rgba(255,107,107,0.04); }
+    .info-card.green { border-color:rgba(0,255,136,0.25); background:rgba(0,255,136,0.04); }
+    .info-card p { margin-bottom:0; }
+    .info-card-title { font-family:var(--font-display); font-size:0.85rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px; color:var(--accent); }
+    .info-card.warning .info-card-title { color:var(--accent3); }
+    .info-card.green .info-card-title { color:var(--green); }
+
+    /* TOC */
+    .toc { background:var(--surface); border:1px solid var(--border2); border-radius:var(--radius); padding:28px 32px; margin-bottom:52px; }
+    .toc-title { font-family:var(--font-display); font-size:0.85rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text3); margin-bottom:16px; }
+    .toc ol { list-style:none; padding:0; margin:0; counter-reset:toc; }
+    .toc li { counter-increment:toc; margin-bottom:8px; display:flex; align-items:center; gap:12px; font-size:0.9rem; }
+    .toc li::before { content:counter(toc,decimal-leading-zero); font-family:var(--font-display); font-size:0.72rem; color:var(--text3); min-width:20px; }
+    .toc a { color:var(--text2); text-decoration:none; transition:color 0.2s; }
+    .toc a:hover { color:var(--accent); text-decoration:none; }
+
+    /* FOOTER */
+    footer { background:var(--bg2); border-top:1px solid var(--border); padding:40px 0; }
+    .footer-inner { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+    .footer-links { display:flex; gap:20px; flex-wrap:wrap; }
+    .footer-links a { color:var(--text3); font-size:0.83rem; text-decoration:none; transition:color 0.2s; }
+    .footer-links a:hover { color:var(--accent); }
+    .footer-copy { color:var(--text3); font-size:0.82rem; }
+
+    @media(max-width:600px) {
+      .page-hero { padding:60px 0 40px; }
+      h2 { font-size:1.25rem; }
+      .toc { padding:20px; }
+      .info-card { padding:18px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav role="navigation" aria-label="Main navigation">
+  <div class="container-wide">
+    <div class="nav-inner">
+      <a href="index.html" class="logo" aria-label="MobileViewer Home">
+        <div class="logo-icon">
+          <svg viewBox="0 0 20 20" fill="none"><rect x="4" y="1" width="12" height="18" rx="3" stroke="black" stroke-width="2"/><circle cx="10" cy="16" r="1" fill="black"/></svg>
+        </div>
+        MobileViewer
+      </a>
+      <a href="index.html" class="nav-back" aria-label="Back to home">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Tool
+      </a>
+    </div>
+  </div>
+</nav>
+
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="container page-hero-inner">
+    <div class="tag">🔒 Legal</div>
+    <h1 id="page-title">Privacy <span class="gradient-text">Policy</span></h1>
+    <p style="color:var(--text2); max-width:520px; margin-top:12px;">We built MobileViewer to be private by design. Here's exactly what we collect, what we don't, and how we protect you.</p>
+    <div class="page-meta">
+      <div class="page-meta-item"><div class="page-meta-dot"></div>Effective: January 1, 2025</div>
+      <div class="page-meta-item"><div class="page-meta-dot" style="background:var(--green)"></div>Last updated: January 1, 2025</div>
+      <div class="page-meta-item"><div class="page-meta-dot" style="background:var(--accent2)"></div>~5 min read</div>
+    </div>
+  </div>
+</section>
+
+<section class="page-content">
+  <div class="container">
+
+    <div class="info-card green">
+      <div class="info-card-title">✦ The Short Version</div>
+      <p>MobileViewer runs entirely in your browser. We do not store URLs you preview, we do not track your browsing sessions, and we do not sell your data. Basic analytics (page views, country-level) may be collected anonymously to help us improve the tool.</p>
+    </div>
+
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-title">Table of Contents</div>
+      <ol>
+        <li><a href="#information-we-collect">Information We Collect</a></li>
+        <li><a href="#information-we-dont-collect">Information We Do NOT Collect</a></li>
+        <li><a href="#how-we-use">How We Use Information</a></li>
+        <li><a href="#cookies">Cookies &amp; Local Storage</a></li>
+        <li><a href="#third-parties">Third-Party Services</a></li>
+        <li><a href="#data-security">Data Security</a></li>
+        <li><a href="#childrens-privacy">Children's Privacy</a></li>
+        <li><a href="#your-rights">Your Rights</a></li>
+        <li><a href="#changes">Changes to This Policy</a></li>
+        <li><a href="#contact-privacy">Contact Us</a></li>
+      </ol>
+    </nav>
+
+    <div class="prose">
+
+      <h2 id="information-we-collect">1. Information We Collect</h2>
+      <p>MobileViewer is a client-side web tool. The tool itself — the URL viewer and device simulator — operates entirely within your browser and does not transmit the URLs you enter to our servers.</p>
+      <p>We may collect the following limited, non-personal information:</p>
+      <ul>
+        <li><strong>Analytics data:</strong> Page views, session duration, browser type, operating system, and approximate geographic region (country-level). This data is aggregated and anonymized.</li>
+        <li><strong>Error logs:</strong> If the application encounters an error, basic technical information (error type, browser version) may be logged to help us diagnose and fix issues.</li>
+        <li><strong>Contact form data:</strong> If you contact us via our contact page, we collect your name, email address, and the content of your message.</li>
+      </ul>
+
+      <h2 id="information-we-dont-collect">2. Information We Do NOT Collect</h2>
+      <div class="info-card accent">
+        <div class="info-card-title">🛡 Privacy-First Design</div>
+        <p>The following data is never collected, logged, or transmitted by MobileViewer under any circumstances.</p>
+      </div>
+      <ul>
+        <li>The URLs you enter into the MobileViewer tool</li>
+        <li>The content of websites you preview</li>
+        <li>Your browsing history within previewed websites</li>
+        <li>Login credentials or form inputs entered into previewed sites</li>
+        <li>Your IP address (beyond what hosting infrastructure logs anonymously)</li>
+        <li>Personal identifiers of any kind</li>
+      </ul>
+
+      <h2 id="how-we-use">3. How We Use Information</h2>
+      <p>The limited anonymous information we may collect is used solely for:</p>
+      <ul>
+        <li><strong>Service improvement:</strong> Understanding which devices and features are most used so we can prioritize development.</li>
+        <li><strong>Performance monitoring:</strong> Ensuring the application loads quickly and works correctly across different environments.</li>
+        <li><strong>Support:</strong> Responding to messages sent through our contact form.</li>
+      </ul>
+      <p>We do not use your information for advertising, profiling, or any commercial purpose beyond operating and improving MobileViewer.</p>
+
+      <h2 id="cookies">4. Cookies &amp; Local Storage</h2>
+      <p>MobileViewer uses minimal browser storage:</p>
+      <ul>
+        <li><strong>No tracking cookies</strong> are set by MobileViewer itself.</li>
+        <li><strong>Session preferences</strong> (such as your last-selected device) may be stored in your browser's <code>localStorage</code> for convenience. This data never leaves your device.</li>
+        <li><strong>Analytics providers</strong> (if used) may set their own cookies. See the Third-Party Services section below.</li>
+      </ul>
+      <p>You can clear any stored data at any time through your browser's developer tools or site settings.</p>
+
+      <h2 id="third-parties">5. Third-Party Services</h2>
+      <p>MobileViewer may integrate with the following third-party services:</p>
+      <ul>
+        <li><strong>Vercel:</strong> Our hosting provider. Vercel's infrastructure may log basic request metadata such as timestamps and response codes. See <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">Vercel's Privacy Policy</a>.</li>
+        <li><strong>Google Fonts:</strong> Typography is loaded from Google Fonts, which may collect anonymized request data per <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</li>
+        <li><strong>Analytics:</strong> If we use an analytics service, it will be privacy-focused (such as Plausible or Fathom) which does not use cookies and does not collect personal data.</li>
+      </ul>
+      <p>We do not sell, rent, or share your information with any third party for marketing purposes.</p>
+
+      <h2 id="data-security">6. Data Security</h2>
+      <p>We take the security of your information seriously. MobileViewer uses HTTPS for all connections, ensuring data in transit is encrypted. Since the tool is client-side and we collect minimal data, the attack surface is inherently small.</p>
+      <p>However, no method of transmission over the internet is 100% secure. We encourage you to avoid entering sensitive credentials or personal information into websites previewed through MobileViewer, as with any browser-based iframe tool.</p>
+
+      <h2 id="childrens-privacy">7. Children's Privacy</h2>
+      <p>MobileViewer is not directed at children under the age of 13. We do not knowingly collect personal information from children. If you believe a child has provided us personal information, please contact us immediately and we will delete it.</p>
+
+      <h2 id="your-rights">8. Your Rights</h2>
+      <p>Depending on your jurisdiction, you may have the right to:</p>
+      <ul>
+        <li>Access the personal data we hold about you</li>
+        <li>Request correction of inaccurate data</li>
+        <li>Request deletion of your data</li>
+        <li>Object to processing of your data</li>
+        <li>Data portability</li>
+      </ul>
+      <p>Since MobileViewer collects minimal personal data, most rights requests will be straightforward to fulfill. Contact us at the address below to exercise any of these rights.</p>
+
+      <h2 id="changes">9. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. When we do, we'll update the "Last updated" date at the top of this page. We encourage you to review this page periodically. Continued use of MobileViewer after changes are posted constitutes acceptance of the updated policy.</p>
+
+      <h2 id="contact-privacy">10. Contact Us</h2>
+      <p>If you have any questions, concerns, or requests regarding this Privacy Policy or your data, please reach out:</p>
+      <div class="info-card">
+        <p><strong>MobileViewer</strong><br/>
+        Website: <a href="https://mobileviewer.vercel.app">mobileviewer.vercel.app</a><br/>
+        Email: <a href="mailto:privacy@mobileviewer.vercel.app">privacy@mobileviewer.vercel.app</a><br/>
+        Contact Form: <a href="contact.html">Contact Page</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="logo" aria-label="MobileViewer home">
+          <div class="logo-icon">
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="1" width="12" height="18" rx="3" stroke="black" stroke-width="2"/>
+              <circle cx="10" cy="16" r="1" fill="black"/>
+            </svg>
+          </div>
+          MobileViewer
+        </a>
+        <p>A free, instant mobile device simulator for previewing any URL inside realistic device frames. Built for developers, designers, and QA teams.</p>
+        <div style="margin-top:20px; display:flex; gap:10px;">
+          <div class="fbadge" style="background:rgba(0,229,255,0.1); color:var(--accent); border:1px solid rgba(0,229,255,0.2);">Free</div>
+          <div class="fbadge" style="background:rgba(0,255,136,0.1); color:var(--green); border:1px solid rgba(0,255,136,0.2);">No Account</div>
+          <div class="fbadge" style="background:rgba(123,97,255,0.1); color:var(--accent2); border:1px solid rgba(123,97,255,0.2);">Instant</div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Tool</h5>
+        <a href="#tool">Mobile Viewer</a>
+        <a href="#devices">Supported Devices</a>
+        <a href="#features">Features</a>
+        <a href="#how">How It Works</a>
+      </div>
+      <div class="footer-col">
+        <h5>Pages</h5>
+        <a href="privacy">Privacy Policy</a>
+        <a href="terms">Terms of Use</a>
+        <a href="contact">Contact</a>
+        <a href="about">About</a>
+        <a href="disclaimer">Disclaimer</a>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <a href="#faq">FAQ</a>
+        <a href="#features">Changelog</a>
+        <a href="#faq">Documentation</a>
+        <a href="mailto:nolushac@gmail.com">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 MobileViewer · <a href="https://mobileviewer.vercel.app" style="color:var(--text3);">mobileviewer.vercel.app</a> · All rights reserved.</p>
+      <p style="color: var(--text3);">Built for the web, by the web 🌐</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
