@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact – MobileViewer</title>
+  <meta name="description" content="Get in touch with the MobileViewer team. Report a bug, suggest a feature, ask a question, or send us feedback about our free mobile preview tool." />
+  <link rel="canonical" href="https://mobileviewer.vercel.app/contact.html" />
+  <meta property="og:title" content="Contact MobileViewer" />
+  <meta property="og:description" content="Reach out to the MobileViewer team for support, feedback, or feature requests." />
+  <meta property="og:url" content="https://mobileviewer.vercel.app/contact.html" />
+  <meta name="robots" content="index, follow" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact MobileViewer",
+    "url": "https://mobileviewer.vercel.app/contact.html",
+    "description": "Contact the MobileViewer team for support, bug reports, and feature requests.",
+    "isPartOf": { "@type": "WebSite", "name": "MobileViewer", "url": "https://mobileviewer.vercel.app" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:#080c10; --bg2:#0d1117; --bg3:#111820;
+      --surface:#151d28; --surface2:#1c2636;
+      --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.12);
+      --accent:#00e5ff; --accent2:#7b61ff; --accent3:#ff6b6b; --green:#00ff88;
+      --text:#e8edf2; --text2:#8fa3b8; --text3:#4d6070;
+      --radius:16px; --radius-sm:8px;
+      --font-display:'Syne',sans-serif; --font-body:'DM Sans',sans-serif;
+    }
+    html { scroll-behavior:smooth; }
+    body { background:var(--bg); color:var(--text); font-family:var(--font-body); font-size:16px; line-height:1.7; overflow-x:hidden; }
+    body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:9999; opacity:0.4; }
+    ::-webkit-scrollbar { width:5px; } ::-webkit-scrollbar-track { background:var(--bg); } ::-webkit-scrollbar-thumb { background:var(--surface2); border-radius:10px; }
+    .container { max-width:960px; margin:0 auto; padding:0 24px; }
+    .container-wide { max-width:1100px; margin:0 auto; padding:0 24px; }
+    h1,h2,h3 { font-family:var(--font-display); font-weight:700; line-height:1.2; }
+    h1 { font-size:clamp(2rem,5vw,3.4rem); font-weight:800; }
+    p { color:var(--text2); margin-bottom:16px; }
+    a { color:var(--accent); text-decoration:none; } a:hover { text-decoration:underline; }
+    strong { color:var(--text); font-weight:600; }
+
+    nav { position:sticky; top:0; z-index:100; background:rgba(8,12,16,0.85); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); }
+    .nav-inner { display:flex; align-items:center; justify-content:space-between; padding:18px 0; }
+    .logo { font-family:var(--font-display); font-size:1.25rem; font-weight:800; color:var(--text); text-decoration:none; display:flex; align-items:center; gap:10px; }
+    .logo-icon { width:32px; height:32px; border-radius:9px; background:linear-gradient(135deg,var(--accent),var(--accent2)); display:flex; align-items:center; justify-content:center; }
+    .logo-icon svg { width:16px; height:16px; }
+    .nav-back { display:flex; align-items:center; gap:8px; font-size:0.88rem; color:var(--text2); text-decoration:none; border:1px solid var(--border2); border-radius:100px; padding:7px 16px; transition:all 0.2s; font-family:var(--font-display); font-weight:600; }
+    .nav-back:hover { color:var(--accent); border-color:var(--accent); text-decoration:none; }
+
+    /* HERO */
+    .page-hero { padding:80px 0 60px; border-bottom:1px solid var(--border); position:relative; overflow:hidden; }
+    .page-hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 50% 0%, rgba(123,97,255,0.08) 0%, rgba(0,229,255,0.03) 50%, transparent 80%); pointer-events:none; }
+    .page-hero-grid { position:absolute; inset:0; background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px); background-size:60px 60px; mask-image:radial-gradient(ellipse 60% 50% at 50% 0%,black,transparent); }
+    .page-hero-inner { position:relative; }
+    .tag { display:inline-flex; align-items:center; gap:6px; font-family:var(--font-display); font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent2); padding:5px 12px; border:1px solid rgba(123,97,255,0.25); border-radius:100px; background:rgba(123,97,255,0.06); margin-bottom:20px; }
+    .gradient-text { background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .page-hero p { color:var(--text2); max-width:500px; margin-top:12px; }
+
+    /* LAYOUT */
+    .contact-layout { display:grid; grid-template-columns:1fr 1.6fr; gap:48px; padding:72px 0 100px; align-items:start; }
+
+    /* SIDEBAR */
+    .contact-sidebar { display:flex; flex-direction:column; gap:20px; }
+    .contact-info-card { background:var(--surface); border:1px solid var(--border2); border-radius:var(--radius); padding:28px; }
+    .cic-icon { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:14px; font-size:1.2rem; }
+    .cic-cyan { background:rgba(0,229,255,0.1); }
+    .cic-purple { background:rgba(123,97,255,0.1); }
+    .cic-green { background:rgba(0,255,136,0.1); }
+    .contact-info-card h3 { font-size:1rem; margin-bottom:6px; }
+    .contact-info-card p { font-size:0.88rem; color:var(--text2); margin:0; }
+    .contact-info-card a { color:var(--accent); font-size:0.88rem; font-weight:500; }
+
+    .response-badge { display:flex; align-items:center; gap:10px; padding:14px 18px; background:rgba(0,255,136,0.06); border:1px solid rgba(0,255,136,0.2); border-radius:var(--radius-sm); margin-top:8px; }
+    .rb-dot { width:8px; height:8px; border-radius:50%; background:var(--green); flex-shrink:0; animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+    .response-badge p { font-size:0.82rem; color:var(--text2); margin:0; }
+    .response-badge strong { color:var(--green); }
+
+    /* FORM */
+    .contact-form-wrap { background:var(--surface); border:1px solid var(--border2); border-radius:20px; padding:40px; }
+    .form-title { font-size:1.4rem; margin-bottom:6px; }
+    .form-sub { font-size:0.9rem; color:var(--text2); margin-bottom:32px; }
+
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .form-group { display:flex; flex-direction:column; gap:8px; margin-bottom:20px; }
+    .form-group label { font-family:var(--font-display); font-size:0.82rem; font-weight:600; color:var(--text); letter-spacing:0.04em; }
+    .form-group label span { color:var(--accent3); margin-left:2px; }
+    .form-input, .form-select, .form-textarea {
+      background:var(--bg2); border:1px solid var(--border2); border-radius:var(--radius-sm);
+      color:var(--text); font-family:var(--font-body); font-size:0.95rem;
+      padding:12px 16px; outline:none; transition:border-color 0.2s, box-shadow 0.2s;
+      width:100%;
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color:var(--text3); }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(0,229,255,0.08); }
+    .form-select { appearance:none; background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234d6070' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 16px center; cursor:pointer; }
+    .form-select option { background:var(--bg2); color:var(--text); }
+    .form-textarea { resize:vertical; min-height:130px; line-height:1.6; }
+
+    .char-count { font-size:0.75rem; color:var(--text3); text-align:right; margin-top:4px; }
+
+    .form-checkbox { display:flex; align-items:flex-start; gap:12px; }
+    .form-checkbox input[type="checkbox"] { width:18px; height:18px; flex-shrink:0; margin-top:2px; accent-color:var(--accent); cursor:pointer; }
+    .form-checkbox label { font-size:0.85rem; color:var(--text2); cursor:pointer; }
+
+    .submit-btn {
+      width:100%; padding:14px; border-radius:var(--radius-sm);
+      font-family:var(--font-display); font-size:1rem; font-weight:700;
+      background:var(--accent); color:#000; border:none; cursor:pointer;
+      transition:all 0.2s; box-shadow:0 0 30px rgba(0,229,255,0.25);
+      display:flex; align-items:center; justify-content:center; gap:10px; margin-top:8px;
+    }
+    .submit-btn:hover { box-shadow:0 0 50px rgba(0,229,255,0.45); transform:translateY(-1px); }
+    .submit-btn:active { transform:translateY(0); }
+
+    /* SUCCESS STATE */
+    .success-state { display:none; text-align:center; padding:60px 20px; }
+    .success-icon { width:60px; height:60px; border-radius:50%; background:rgba(0,255,136,0.1); border:2px solid rgba(0,255,136,0.3); display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-size:1.6rem; }
+    .success-state h3 { font-size:1.4rem; margin-bottom:10px; }
+    .success-state p { color:var(--text2); margin-bottom:24px; }
+    .success-back { display:inline-flex; align-items:center; gap:8px; padding:10px 22px; border-radius:var(--radius-sm); background:var(--accent); color:#000; font-family:var(--font-display); font-size:0.9rem; font-weight:700; cursor:pointer; border:none; text-decoration:none; }
+
+    /* TOPICS */
+    .topic-chips { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+    .chip {
+      padding:6px 14px; border-radius:100px; font-size:0.8rem;
+      font-family:var(--font-display); font-weight:600;
+      border:1px solid var(--border2); background:var(--bg2);
+      color:var(--text2); cursor:pointer; transition:all 0.2s; user-select:none;
+    }
+    .chip:hover, .chip.selected { background:rgba(0,229,255,0.08); border-color:var(--accent); color:var(--accent); }
+
+    footer { background:var(--bg2); border-top:1px solid var(--border); padding:40px 0; }
+    .footer-inner { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+    .footer-links { display:flex; gap:20px; flex-wrap:wrap; }
+    .footer-links a { color:var(--text3); font-size:0.83rem; text-decoration:none; transition:color 0.2s; }
+    .footer-links a:hover { color:var(--accent); }
+    .footer-copy { color:var(--text3); font-size:0.82rem; }
+
+    @media(max-width:800px){
+      .contact-layout { grid-template-columns:1fr; }
+      .contact-form-wrap { padding:28px 22px; }
+      .form-row { grid-template-columns:1fr; }
+      .page-hero { padding:60px 0 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav role="navigation" aria-label="Main navigation">
+  <div class="container-wide">
+    <div class="nav-inner">
+      <a href="index.html" class="logo" aria-label="MobileViewer Home">
+        <div class="logo-icon"><svg viewBox="0 0 20 20" fill="none"><rect x="4" y="1" width="12" height="18" rx="3" stroke="black" stroke-width="2"/><circle cx="10" cy="16" r="1" fill="black"/></svg></div>
+        MobileViewer
+      </a>
+      <a href="index.html" class="nav-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Tool
+      </a>
+    </div>
+  </div>
+</nav>
+
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="container page-hero-inner">
+    <div class="tag">✉ Get in Touch</div>
+    <h1 id="page-title">We'd Love to<br/><span class="gradient-text">Hear From You</span></h1>
+    <p>Found a bug? Have a feature idea? Just want to say hello? Send us a message — we read every one.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="contact-layout">
+
+    <!-- Sidebar -->
+    <aside class="contact-sidebar" aria-label="Contact information">
+      <div class="contact-info-card">
+        <div class="cic-icon cic-cyan">📧</div>
+        <h3>Email Us</h3>
+        <p>For general inquiries and support:</p>
+        <a href="mailto:hello@mobileviewer.vercel.app">hello@mobileviewer.vercel.app</a>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="cic-icon cic-purple">🐛</div>
+        <h3>Report a Bug</h3>
+        <p>Found something broken? Help us fix it:</p>
+        <a href="mailto:bugs@mobileviewer.vercel.app">bugs@mobileviewer.vercel.app</a>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="cic-icon cic-green">💡</div>
+        <h3>Feature Requests</h3>
+        <p>Have an idea that would make MobileViewer better?</p>
+        <a href="mailto:ideas@mobileviewer.vercel.app">ideas@mobileviewer.vercel.app</a>
+      </div>
+
+      <div class="response-badge" aria-label="Response time indicator">
+        <div class="rb-dot"></div>
+        <p>We typically respond within <strong>1–2 business days</strong></p>
+      </div>
+
+      <div class="contact-info-card" style="background:var(--bg2);">
+        <p style="font-size:0.85rem; margin:0;">Before reaching out, check our <a href="index.html#faq">FAQ section</a> — your question may already be answered there.</p>
+      </div>
+    </aside>
+
+    <!-- Form -->
+    <main>
+      <div class="contact-form-wrap">
+        <div id="formContainer">
+          <h2 class="form-title">Send a Message</h2>
+          <p class="form-sub">Fill in the details below and we'll get back to you as soon as possible.</p>
+
+          <form id="contactForm" novalidate aria-label="Contact form">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name <span aria-hidden="true">*</span></label>
+                <input type="text" id="firstName" name="firstName" class="form-input" placeholder="Jane" required autocomplete="given-name" />
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name <span aria-hidden="true">*</span></label>
+                <input type="text" id="lastName" name="lastName" class="form-input" placeholder="Smith" required autocomplete="family-name" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address <span aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" class="form-input" placeholder="jane@example.com" required autocomplete="email" />
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject <span aria-hidden="true">*</span></label>
+              <select id="subject" name="subject" class="form-select form-input" required>
+                <option value="" disabled selected>Select a topic…</option>
+                <option value="bug">Bug Report</option>
+                <option value="feature">Feature Request</option>
+                <option value="device">New Device Profile</option>
+                <option value="account">Account / Access</option>
+                <option value="privacy">Privacy / Legal</option>
+                <option value="other">General Question</option>
+                <option value="feedback">General Feedback</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Quick Tags (optional)</label>
+              <div class="topic-chips" role="group" aria-label="Select relevant tags">
+                <div class="chip" onclick="toggleChip(this)" role="checkbox" aria-checked="false" tabindex="0">iOS</div>
+                <div class="chip" onclick="toggleChip(this)" role="checkbox" aria-checked="false" tabindex="0">Android</div>
+                <div class="chip" onclick="toggleChip(this)" role="checkbox" aria-checked="false" tabindex="0">Tablet</div>
+                <div class="chip" onclick="toggleChip(this)" role="checkbox" aria-checked="false" tabindex="0">Layout</div>
+                <div class="chip" onclick="toggleChip(this)" role="checkbox" aria-checked="false" tabindex="0">Performance</div>
+                <div class="chip" onclick="toggleChip(this)" role="checkbox" aria-checked="false" tabindex="0">URL Loading</div>
+                <div class="chip" onclick="toggleChip(this)" role="checkbox" aria-checked="false" tabindex="0">UI/Design</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message <span aria-hidden="true">*</span></label>
+              <textarea id="message" name="message" class="form-textarea" placeholder="Describe your issue, idea, or question in as much detail as you'd like…" required maxlength="2000" oninput="updateCharCount(this)"></textarea>
+              <div class="char-count"><span id="charCount">0</span> / 2000</div>
+            </div>
+
+            <div class="form-group">
+              <div class="form-checkbox">
+                <input type="checkbox" id="consent" name="consent" required />
+                <label for="consent">I agree to MobileViewer's <a href="privacy.html">Privacy Policy</a> and consent to being contacted in response to this message. <span style="color:var(--accent3)">*</span></label>
+              </div>
+            </div>
+
+            <div id="formError" role="alert" style="display:none; background:rgba(255,107,107,0.08); border:1px solid rgba(255,107,107,0.3); border-radius:var(--radius-sm); padding:12px 16px; font-size:0.88rem; color:var(--accent3); margin-bottom:16px;"></div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              Send Message
+            </button>
+          </form>
+        </div>
+
+        <!-- Success State -->
+        <div class="success-state" id="successState" aria-live="polite">
+          <div class="success-icon" aria-hidden="true">✓</div>
+          <h3>Message Sent!</h3>
+          <p>Thank you for reaching out. We've received your message and will reply to your email within 1–2 business days.</p>
+          <a href="index.html" class="success-back">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back to MobileViewer
+          </a>
+        </div>
+      </div>
+    </main>
+
+  </div>
+</div>
+
+<!-- Footer -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="logo" aria-label="MobileViewer home">
+          <div class="logo-icon">
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="1" width="12" height="18" rx="3" stroke="black" stroke-width="2"/>
+              <circle cx="10" cy="16" r="1" fill="black"/>
+            </svg>
+          </div>
+          MobileViewer
+        </a>
+        <p>A free, instant mobile device simulator for previewing any URL inside realistic device frames. Built for developers, designers, and QA teams.</p>
+        <div style="margin-top:20px; display:flex; gap:10px;">
+          <div class="fbadge" style="background:rgba(0,229,255,0.1); color:var(--accent); border:1px solid rgba(0,229,255,0.2);">Free</div>
+          <div class="fbadge" style="background:rgba(0,255,136,0.1); color:var(--green); border:1px solid rgba(0,255,136,0.2);">No Account</div>
+          <div class="fbadge" style="background:rgba(123,97,255,0.1); color:var(--accent2); border:1px solid rgba(123,97,255,0.2);">Instant</div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Tool</h5>
+        <a href="#tool">Mobile Viewer</a>
+        <a href="#devices">Supported Devices</a>
+        <a href="#features">Features</a>
+        <a href="#how">How It Works</a>
+      </div>
+      <div class="footer-col">
+        <h5>Pages</h5>
+        <a href="privacy">Privacy Policy</a>
+        <a href="terms">Terms of Use</a>
+        <a href="contact">Contact</a>
+        <a href="about">About</a>
+        <a href="disclaimer">Disclaimer</a>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <a href="#faq">FAQ</a>
+        <a href="#features">Changelog</a>
+        <a href="#faq">Documentation</a>
+        <a href="mailto:nolushac@gmail.com">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 MobileViewer · <a href="https://mobileviewer.vercel.app" style="color:var(--text3);">mobileviewer.vercel.app</a> · All rights reserved.</p>
+      <p style="color: var(--text3);">Built for the web, by the web 🌐</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function updateCharCount(el) {
+    document.getElementById('charCount').textContent = el.value.length;
+  }
+
+  function toggleChip(el) {
+    el.classList.toggle('selected');
+    const checked = el.classList.contains('selected');
+    el.setAttribute('aria-checked', checked.toString());
+  }
+
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleChip(chip); }
+    });
+  });
+
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const errorEl = document.getElementById('formError');
+    errorEl.style.display = 'none';
+
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName  = document.getElementById('lastName').value.trim();
+    const email     = document.getElementById('email').value.trim();
+    const subject   = document.getElementById('subject').value;
+    const message   = document.getElementById('message').value.trim();
+    const consent   = document.getElementById('consent').checked;
+
+    if (!firstName || !lastName) { showError('Please enter your full name.'); return; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('Please enter a valid email address.'); return; }
+    if (!subject) { showError('Please select a subject.'); return; }
+    if (!message || message.length < 10) { showError('Please enter a message of at least 10 characters.'); return; }
+    if (!consent) { showError('Please agree to the Privacy Policy to send your message.'); return; }
+
+    // Simulate submission
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      document.getElementById('formContainer').style.display = 'none';
+      document.getElementById('successState').style.display = 'block';
+    }, 1200);
+  });
+
+  function showError(msg) {
+    const el = document.getElementById('formError');
+    el.textContent = msg;
+    el.style.display = 'block';
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+</script>
+
+</body>
+</html>
