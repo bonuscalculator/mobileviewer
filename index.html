@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MobileViewer – View Any Website on Mobile Instantly</title>
+  <meta name="description" content="MobileViewer lets you preview, test, and inspect any URL on realistic mobile device frames right in your browser. No installs. No apps. Instant mobile simulation." />
+  <meta name="keywords" content="mobile viewer, mobile website preview, responsive design tester, mobile simulator, URL viewer, device preview tool, mobile web testing, responsive checker" />
+  <meta name="author" content="MobileViewer" />
+  <link rel="canonical" href="https://mobileviewer.vercel.app/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="MobileViewer – View Any Website on Mobile Instantly" />
+  <meta property="og:description" content="Preview any URL inside realistic mobile device frames. Test responsive layouts, simulate touch interactions, and inspect mobile web experiences – all from your desktop." />
+  <meta property="og:url" content="https://mobileviewer.vercel.app/" />
+  <meta property="og:image" content="https://mobileviewer.vercel.app/og-image.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MobileViewer – View Any Website on Mobile" />
+  <meta name="twitter:description" content="Instantly preview any website inside iPhone, Android, and tablet frames. Free mobile simulator tool." />
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "MobileViewer",
+    "url": "https://mobileviewer.vercel.app",
+    "description": "A free online mobile device simulator and URL viewer that lets you preview any website in realistic mobile frames including iPhone, Android, and tablet devices.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "iPhone frame simulation",
+      "Android device preview",
+      "Tablet viewport testing",
+      "Custom viewport sizes",
+      "Responsive design testing",
+      "URL-based mobile preview",
+      "Real-time device rotation",
+      "Screenshot capture"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is MobileViewer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "MobileViewer is a free online tool that lets you preview any website URL inside realistic mobile device frames — including iPhone, Android, and tablet — directly in your browser without installing anything."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I use MobileViewer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Simply paste any URL into the input field, choose your target device (iPhone, Android, or tablet), and click Preview. The website loads inside the selected device frame instantly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is MobileViewer free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, MobileViewer is completely free to use. No account, no installation, and no credit card required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which devices can I simulate with MobileViewer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "MobileViewer supports iPhone 15 Pro, iPhone SE, Samsung Galaxy S24, Google Pixel 8, iPad Pro, iPad Mini, and custom viewport dimensions."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080c10;
+      --bg2: #0d1117;
+      --bg3: #111820;
+      --surface: #151d28;
+      --surface2: #1c2636;
+      --border: rgba(255,255,255,0.07);
+      --border2: rgba(255,255,255,0.12);
+      --accent: #00e5ff;
+      --accent2: #7b61ff;
+      --accent3: #ff6b6b;
+      --green: #00ff88;
+      --text: #e8edf2;
+      --text2: #8fa3b8;
+      --text3: #4d6070;
+      --radius: 16px;
+      --radius-sm: 8px;
+      --shadow: 0 0 60px rgba(0,229,255,0.06);
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 10px; }
+
+    /* ── UTILITY ── */
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    .tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-display); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); padding: 5px 12px;
+      border: 1px solid rgba(0,229,255,0.25);
+      border-radius: 100px; background: rgba(0,229,255,0.06);
+    }
+    .tag-purple { color: var(--accent2); border-color: rgba(123,97,255,0.25); background: rgba(123,97,255,0.06); }
+    .tag-green { color: var(--green); border-color: rgba(0,255,136,0.25); background: rgba(0,255,136,0.06); }
+
+    h1,h2,h3,h4 { font-family: var(--font-display); font-weight: 700; line-height: 1.1; }
+    h1 { font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 800; }
+    h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
+    h3 { font-size: 1.35rem; font-weight: 600; }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 60%, #ff6b6b 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px; border-radius: var(--radius-sm);
+      font-family: var(--font-display); font-size: 0.95rem; font-weight: 600;
+      cursor: pointer; border: none; transition: all 0.2s ease; text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--accent); color: #000;
+      box-shadow: 0 0 30px rgba(0,229,255,0.3);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 50px rgba(0,229,255,0.5); }
+    .btn-ghost {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border2);
+    }
+    .btn-ghost:hover { background: var(--surface); border-color: var(--accent); color: var(--accent); }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(8,12,16,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0;
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 0;
+    }
+    .logo {
+      font-family: var(--font-display); font-size: 1.35rem; font-weight: 800;
+      color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 10px;
+    }
+    .logo-icon {
+      width: 34px; height: 34px; border-radius: 9px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-icon svg { width: 18px; height: 18px; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--text2); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { display: flex; align-items: center; gap: 12px; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+
+    /* ── HERO ── */
+    #hero {
+      padding: 100px 0 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; pointer-events: none;
+    }
+    .hero-glow {
+      position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse, rgba(0,229,255,0.08) 0%, rgba(123,97,255,0.05) 40%, transparent 70%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black, transparent);
+    }
+
+    .hero-content { position: relative; text-align: center; max-width: 820px; margin: 0 auto; }
+    .hero-tag { margin-bottom: 28px; }
+    .hero-title { margin-bottom: 24px; }
+    .hero-sub {
+      font-size: 1.2rem; color: var(--text2); max-width: 580px; margin: 0 auto 44px;
+      font-weight: 300;
+    }
+    .hero-cta { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 60px; }
+
+    /* ── DEVICE VIEWER TOOL ── */
+    .tool-wrapper {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03);
+    }
+    .tool-topbar {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 20px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
+    .tool-dots { display: flex; gap: 7px; }
+    .tool-dots span {
+      width: 12px; height: 12px; border-radius: 50%;
+    }
+    .dot-r { background: #ff5f57; }
+    .dot-y { background: #febc2e; }
+    .dot-g { background: #28c840; }
+
+    .url-bar {
+      flex: 1; display: flex; align-items: center; gap: 10px;
+      background: var(--bg3); border: 1px solid var(--border2);
+      border-radius: var(--radius-sm); padding: 8px 14px;
+    }
+    .url-bar svg { color: var(--text3); flex-shrink: 0; }
+    #urlInput {
+      flex: 1; background: none; border: none; outline: none;
+      color: var(--text); font-family: var(--font-body); font-size: 0.9rem;
+    }
+    #urlInput::placeholder { color: var(--text3); }
+
+    .tool-devices {
+      display: flex; gap: 6px; flex-wrap: wrap; padding: 12px 20px;
+      background: var(--bg2); border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+    .device-label { font-size: 0.78rem; color: var(--text3); font-family: var(--font-display); letter-spacing: 0.05em; margin-right: 6px; }
+    .device-btn {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: 100px;
+      font-size: 0.8rem; font-family: var(--font-display); font-weight: 600;
+      cursor: pointer; border: 1px solid var(--border2);
+      background: transparent; color: var(--text2); transition: all 0.2s;
+    }
+    .device-btn:hover, .device-btn.active {
+      background: var(--accent); color: #000; border-color: var(--accent);
+    }
+    .device-btn svg { width: 13px; height: 13px; }
+
+    .rotate-btn {
+      margin-left: auto;
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: 100px;
+      font-size: 0.8rem; font-family: var(--font-display); font-weight: 600;
+      cursor: pointer; border: 1px solid var(--border2);
+      background: transparent; color: var(--text2); transition: all 0.2s;
+    }
+    .rotate-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+    .tool-stage {
+      min-height: 580px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px 20px;
+      background: radial-gradient(ellipse at 50% 50%, rgba(0,229,255,0.03) 0%, transparent 70%);
+      position: relative;
+    }
+
+    /* Phone frame */
+    .phone-frame {
+      position: relative; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .phone-shell {
+      position: relative; border-radius: 44px;
+      box-shadow: 
+        0 0 0 2px rgba(255,255,255,0.12),
+        0 0 0 4px #1a1a2e,
+        0 0 0 6px rgba(255,255,255,0.06),
+        0 30px 80px rgba(0,0,0,0.8),
+        inset 0 0 0 1px rgba(255,255,255,0.04);
+      overflow: hidden;
+      background: #0a0a0f;
+    }
+
+    .phone-notch {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 120px; height: 34px;
+      background: #0a0a0f; border-radius: 0 0 22px 22px;
+      z-index: 10;
+    }
+
+    .phone-screen {
+      width: 100%; height: 100%;
+      border-radius: 42px; overflow: hidden;
+      position: relative;
+    }
+    .phone-screen iframe {
+      width: 100%; height: 100%; border: none;
+      display: block;
+    }
+    .phone-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 16px; color: var(--text3);
+      background: var(--bg3);
+    }
+    .phone-placeholder .ph-icon {
+      width: 52px; height: 52px;
+      border: 2px dashed var(--border2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text3);
+    }
+    .phone-placeholder p { font-size: 0.85rem; text-align: center; max-width: 180px; }
+
+    /* Device sizes */
+    .device-iphone15 .phone-shell { width: 320px; height: 640px; }
+    .device-iphonese .phone-shell { width: 280px; height: 560px; }
+    .device-pixel .phone-shell { width: 300px; height: 620px; border-radius: 36px; }
+    .device-pixel .phone-shell .phone-screen { border-radius: 34px; }
+    .device-galaxy .phone-shell { width: 310px; height: 650px; }
+    .device-ipad .phone-shell { width: 500px; height: 700px; border-radius: 24px; }
+    .device-ipad .phone-shell .phone-screen { border-radius: 22px; }
+    .device-ipad .phone-notch { display: none; }
+
+    /* Landscape */
+    .landscape .phone-frame { transform: rotate(90deg); }
+    .landscape .phone-shell { width: 640px; height: 320px; border-radius: 44px; }
+
+    .tool-load-btn {
+      position: absolute; bottom: 20px; right: 20px;
+      display: flex; gap: 8px;
+    }
+
+    /* Loading spinner */
+    .spinner {
+      display: none; width: 28px; height: 28px;
+      border: 3px solid var(--border2);
+      border-top-color: var(--accent);
+      border-radius: 50%; animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── STATS STRIP ── */
+    #stats {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+    .stat-item {
+      padding: 32px 24px; text-align: center;
+      border-right: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--font-display); font-size: 3rem; font-weight: 800;
+      line-height: 1; margin-bottom: 6px;
+    }
+    .stat-label { font-size: 0.85rem; color: var(--text2); }
+    .stat-glow {
+      position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%);
+      width: 100px; height: 80px;
+      border-radius: 50%; filter: blur(30px); opacity: 0.3;
+    }
+
+    /* ── FEATURES ── */
+    #features { padding: 120px 0; }
+    .section-header { text-align: center; margin-bottom: 72px; }
+    .section-header .tag { margin-bottom: 20px; }
+    .section-header h2 { margin-bottom: 16px; }
+    .section-header p { color: var(--text2); max-width: 540px; margin: 0 auto; font-size: 1.05rem; }
+
+    .features-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 20px; overflow: hidden;
+    }
+    .feature-card {
+      padding: 40px 32px; background: var(--bg);
+      position: relative; overflow: hidden;
+      transition: background 0.3s;
+    }
+    .feature-card:hover { background: var(--surface); }
+    .feature-card::after {
+      content: ''; position: absolute; inset: 0;
+      opacity: 0; transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .feature-card:hover::after { opacity: 1; }
+
+    .fc-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; font-size: 22px;
+    }
+    .fc-icon-cyan { background: rgba(0,229,255,0.1); color: var(--accent); }
+    .fc-icon-purple { background: rgba(123,97,255,0.1); color: var(--accent2); }
+    .fc-icon-green { background: rgba(0,255,136,0.1); color: var(--green); }
+    .fc-icon-red { background: rgba(255,107,107,0.1); color: var(--accent3); }
+    .fc-icon-yellow { background: rgba(254,188,46,0.1); color: #febc2e; }
+    .fc-icon-blue { background: rgba(56,189,248,0.1); color: #38bdf8; }
+
+    .feature-card h3 { margin-bottom: 10px; font-size: 1.1rem; }
+    .feature-card p { color: var(--text2); font-size: 0.92rem; line-height: 1.6; }
+    .fc-badge {
+      position: absolute; top: 16px; right: 16px;
+      font-size: 0.7rem; padding: 3px 9px; border-radius: 100px;
+      background: rgba(0,229,255,0.1); color: var(--accent);
+      font-family: var(--font-display); font-weight: 600; letter-spacing: 0.05em;
+    }
+
+    /* ── HOW IT WORKS ── */
+    #how { padding: 120px 0; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .steps-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .steps-list { display: flex; flex-direction: column; gap: 40px; }
+    .step-item { display: flex; gap: 24px; }
+    .step-num {
+      flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 1.1rem; font-weight: 800;
+      background: var(--surface2); border: 1px solid var(--border2); color: var(--accent);
+      position: relative;
+    }
+    .step-num::after {
+      content: ''; position: absolute;
+      top: 100%; left: 50%; transform: translateX(-50%);
+      width: 1px; height: 40px; background: var(--border2);
+    }
+    .step-item:last-child .step-num::after { display: none; }
+    .step-content h3 { font-size: 1.1rem; margin-bottom: 6px; }
+    .step-content p { color: var(--text2); font-size: 0.9rem; }
+
+    .steps-visual {
+      position: relative;
+    }
+    .mock-phone {
+      width: 260px; height: 500px; margin: 0 auto;
+      background: var(--surface); border-radius: 40px;
+      border: 2px solid var(--border2);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+      overflow: hidden; position: relative;
+    }
+    .mock-notch {
+      width: 100px; height: 28px; background: var(--bg);
+      border-radius: 0 0 18px 18px; margin: 0 auto;
+    }
+    .mock-content { padding: 12px; }
+    .mock-bar { height: 8px; border-radius: 4px; background: var(--surface2); margin-bottom: 8px; }
+    .mock-bar.w80 { width: 80%; }
+    .mock-bar.w60 { width: 60%; }
+    .mock-bar.w90 { width: 90%; }
+    .mock-img-block { height: 140px; background: var(--surface2); border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+    .mock-img-inner { height: 100%; background: linear-gradient(135deg, rgba(0,229,255,0.08), rgba(123,97,255,0.08)); display: flex; align-items: center; justify-content: center; color: var(--text3); font-size: 2rem; }
+    .mock-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .mock-card { height: 70px; background: var(--surface2); border-radius: 8px; }
+
+    .visual-annotations { position: absolute; right: 0; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 16px; }
+    .annot {
+      background: var(--surface2); border: 1px solid var(--border2);
+      border-radius: var(--radius-sm); padding: 10px 16px;
+      font-size: 0.8rem; font-family: var(--font-display); font-weight: 600;
+      color: var(--text); display: flex; align-items: center; gap: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .annot-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── DEVICES SECTION ── */
+    #devices { padding: 120px 0; }
+    .devices-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      margin-top: 60px;
+    }
+    .device-card {
+      background: var(--surface); border: 1px solid var(--border2);
+      border-radius: var(--radius); padding: 32px 28px;
+      transition: all 0.3s; position: relative; overflow: hidden;
+      cursor: pointer;
+    }
+    .device-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(0,229,255,0.04), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .device-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 0 40px rgba(0,229,255,0.1); }
+    .device-card:hover::before { opacity: 1; }
+    .dc-thumb {
+      height: 200px; background: var(--bg2); border-radius: 10px;
+      margin-bottom: 20px; display: flex; align-items: center; justify-content: center;
+      font-size: 60px; border: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .dc-thumb-glow {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse, rgba(0,229,255,0.08), transparent 70%);
+    }
+    .device-card h3 { margin-bottom: 6px; font-size: 1.05rem; }
+    .device-card p { font-size: 0.85rem; color: var(--text2); margin-bottom: 16px; }
+    .dc-specs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .dc-spec {
+      font-size: 0.75rem; padding: 4px 10px; border-radius: 100px;
+      background: var(--bg2); border: 1px solid var(--border); color: var(--text2);
+    }
+    .dc-badge {
+      position: absolute; top: 16px; right: 16px;
+      font-size: 0.7rem; padding: 3px 9px; border-radius: 100px;
+      font-family: var(--font-display); font-weight: 600;
+    }
+    .badge-new { background: rgba(0,255,136,0.1); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
+    .badge-pop { background: rgba(0,229,255,0.1); color: var(--accent); border: 1px solid rgba(0,229,255,0.2); }
+
+    /* ── USE CASES ── */
+    #usecases { padding: 120px 0; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .usecases-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-top: 60px; }
+    .usecase-tabs { display: flex; flex-direction: column; gap: 4px; }
+    .usecase-tab {
+      padding: 20px 24px; border-radius: var(--radius-sm);
+      border: 1px solid transparent; cursor: pointer;
+      transition: all 0.2s; background: transparent;
+      text-align: left; color: var(--text);
+    }
+    .usecase-tab:hover { background: var(--surface); border-color: var(--border); }
+    .usecase-tab.active { background: var(--surface); border-color: var(--accent); }
+    .usecase-tab.active h4 { color: var(--accent); }
+    .usecase-tab h4 { font-size: 1rem; margin-bottom: 4px; font-family: var(--font-display); }
+    .usecase-tab p { font-size: 0.85rem; color: var(--text2); }
+
+    .usecase-panel { display: none; }
+    .usecase-panel.active { display: block; }
+    .up-card {
+      background: var(--surface2); border: 1px solid var(--border2);
+      border-radius: var(--radius); padding: 36px; min-height: 400px;
+    }
+    .up-icon { font-size: 3rem; margin-bottom: 20px; }
+    .up-card h3 { font-size: 1.4rem; margin-bottom: 12px; }
+    .up-card p { color: var(--text2); font-size: 0.95rem; margin-bottom: 24px; }
+    .up-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .up-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; color: var(--text2); }
+    .up-list li::before { content: '✦'; color: var(--accent); flex-shrink: 0; font-size: 0.7rem; margin-top: 4px; }
+
+    /* ── FAQ ── */
+    #faq { padding: 120px 0; }
+    .faq-list { max-width: 760px; margin: 60px auto 0; display: flex; flex-direction: column; gap: 2px; }
+    .faq-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); overflow: hidden;
+    }
+    .faq-q {
+      width: 100%; padding: 22px 24px; text-align: left;
+      background: none; border: none; color: var(--text);
+      font-family: var(--font-display); font-size: 1rem; font-weight: 600;
+      cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+      gap: 16px;
+    }
+    .faq-q:hover { color: var(--accent); }
+    .faq-icon {
+      width: 24px; height: 24px; border-radius: 50%;
+      border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: all 0.3s; font-size: 0.9rem; color: var(--text2);
+    }
+    .faq-item.open .faq-icon { background: var(--accent); color: #000; border-color: var(--accent); transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
+    .faq-item.open .faq-a { max-height: 300px; }
+    .faq-a-inner { padding: 0 24px 22px; color: var(--text2); font-size: 0.92rem; line-height: 1.7; }
+
+    /* ── CTA ── */
+    #cta { padding: 140px 0; text-align: center; position: relative; overflow: hidden; }
+    .cta-glow {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 700px; height: 400px;
+      background: radial-gradient(ellipse, rgba(0,229,255,0.1) 0%, rgba(123,97,255,0.05) 40%, transparent 70%);
+      pointer-events: none;
+    }
+    #cta h2 { margin-bottom: 16px; }
+    #cta p { color: var(--text2); font-size: 1.1rem; max-width: 480px; margin: 0 auto 40px; }
+    .cta-input-group {
+      display: flex; gap: 10px; max-width: 520px; margin: 0 auto 24px;
+      background: var(--surface); border: 1px solid var(--border2);
+      border-radius: var(--radius-sm); padding: 6px;
+    }
+    .cta-input {
+      flex: 1; background: none; border: none; outline: none;
+      color: var(--text); font-family: var(--font-body); font-size: 0.95rem;
+      padding: 8px 12px;
+    }
+    .cta-input::placeholder { color: var(--text3); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg2); border-top: 1px solid var(--border);
+      padding: 60px 0 40px;
+    }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+    .footer-brand p { color: var(--text2); font-size: 0.9rem; margin-top: 14px; max-width: 260px; line-height: 1.6; }
+    .footer-col h5 { font-family: var(--font-display); font-size: 0.85rem; font-weight: 600; color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+    .footer-col a { display: block; color: var(--text2); text-decoration: none; font-size: 0.9rem; margin-bottom: 10px; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { color: var(--text3); font-size: 0.82rem; }
+    .footer-badges { display: flex; gap: 10px; }
+    .fbadge {
+      padding: 4px 12px; border-radius: 100px; font-size: 0.72rem;
+      font-family: var(--font-display); font-weight: 600; letter-spacing: 0.05em;
+    }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      h1 { font-size: 2.5rem; }
+      h2 { font-size: 2rem; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat-item:nth-child(odd) { border-right: 1px solid var(--border); }
+      .stat-item:last-child { border-bottom: none; }
+      .features-grid { grid-template-columns: 1fr; }
+      .steps-layout { grid-template-columns: 1fr; }
+      .steps-visual { display: none; }
+      .devices-grid { grid-template-columns: 1fr 1fr; }
+      .usecases-layout { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .device-ipad .phone-shell { width: 320px; height: 480px; }
+      .tool-devices { overflow-x: auto; flex-wrap: nowrap; }
+    }
+    @media (max-width: 600px) {
+      #hero { padding: 70px 0 60px; }
+      .hero-cta { flex-direction: column; align-items: center; }
+      .devices-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .cta-input-group { flex-direction: column; }
+      .device-iphone15 .phone-shell { width: 270px; height: 540px; }
+    }
+
+    /* ── MOBILE NAV MENU ── */
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: var(--bg); flex-direction: column; padding: 80px 24px 40px;
+      gap: 8px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu-close {
+      position: absolute; top: 20px; right: 24px;
+      background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer;
+    }
+    .mobile-menu a {
+      color: var(--text); text-decoration: none; font-family: var(--font-display);
+      font-size: 1.4rem; font-weight: 700; padding: 12px 0;
+      border-bottom: 1px solid var(--border); transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation menu">
+  <button class="mobile-menu-close" id="menuClose" aria-label="Close menu">✕</button>
+  <a href="#features">Features</a>
+  <a href="#devices">Devices</a>
+  <a href="#how">How It Works</a>
+  <a href="#usecases">Use Cases</a>
+  <a href="#faq">FAQ</a>
+</div>
+
+<!-- Navigation -->
+<nav role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="logo" aria-label="MobileViewer Home">
+        <div class="logo-icon">
+          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="1" width="12" height="18" rx="3" stroke="black" stroke-width="2"/>
+            <circle cx="10" cy="16" r="1" fill="black"/>
+            <rect x="7" y="3" width="6" height="1" rx="0.5" fill="black" opacity="0.5"/>
+          </svg>
+        </div>
+        MobileViewer
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#devices">Devices</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#usecases">Use Cases</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="#tool" class="btn btn-primary" style="padding:10px 22px; font-size:0.88rem;">Try It Free</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="hero" aria-labelledby="hero-heading">
+  <div class="hero-bg">
+    <div class="hero-glow"></div>
+    <div class="hero-grid"></div>
+  </div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-tag">
+        <span class="tag">✦ Free Mobile Viewer Tool</span>
+      </div>
+      <h1 id="hero-heading">
+        Preview Any Website<br/>
+        <span class="gradient-text">On Any Mobile Device</span>
+      </h1>
+      <p class="hero-sub">
+        Paste a URL, pick a device, and instantly view how any website looks and behaves on iPhone, Android, or tablet — right in your browser.
+      </p>
+      <div class="hero-cta">
+        <a href="#tool" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 3l14 9-14 9V3z"/></svg>
+          Launch Viewer
+        </a>
+        <a href="#how" class="btn btn-ghost">See How It Works</a>
+      </div>
+    </div>
+
+    <!-- ═══ THE MAIN TOOL ═══ -->
+    <div class="tool-wrapper reveal" id="tool" role="main" aria-label="Mobile device viewer tool">
+      <!-- Top bar -->
+      <div class="tool-topbar">
+        <div class="tool-dots">
+          <span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span>
+        </div>
+        <div class="url-bar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+          <input type="url" id="urlInput" placeholder="Enter any URL — e.g. https://example.com" aria-label="Enter URL to preview" autocomplete="off" spellcheck="false" />
+          <div class="spinner" id="loadSpinner" role="status" aria-label="Loading"></div>
+          <button class="btn btn-primary" style="padding:7px 18px; font-size:0.82rem;" onclick="loadURL()" aria-label="Preview URL">Preview</button>
+        </div>
+      </div>
+
+      <!-- Device selector -->
+      <div class="tool-devices" role="toolbar" aria-label="Select device">
+        <span class="device-label">Device:</span>
+        <button class="device-btn active" onclick="setDevice('iphone15', this)" aria-pressed="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="3"/><circle cx="12" cy="18" r="1"/></svg>
+          iPhone 15
+        </button>
+        <button class="device-btn" onclick="setDevice('iphonese', this)" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="3"/><circle cx="12" cy="18" r="1"/></svg>
+          iPhone SE
+        </button>
+        <button class="device-btn" onclick="setDevice('pixel', this)" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="18" r="1"/></svg>
+          Pixel 8
+        </button>
+        <button class="device-btn" onclick="setDevice('galaxy', this)" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="3"/><circle cx="12" cy="18" r="1"/></svg>
+          Galaxy S24
+        </button>
+        <button class="device-btn" onclick="setDevice('ipad', this)" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="12" cy="19" r="0.5"/></svg>
+          iPad Pro
+        </button>
+        <button class="rotate-btn" onclick="toggleLandscape()" id="rotateBtn" aria-label="Toggle landscape mode">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+          Rotate
+        </button>
+      </div>
+
+      <!-- Stage -->
+      <div class="tool-stage" id="deviceStage">
+        <div class="phone-frame device-iphone15" id="phoneFrame">
+          <div class="phone-shell">
+            <div class="phone-notch" aria-hidden="true"></div>
+            <div class="phone-screen">
+              <div class="phone-placeholder" id="phonePlaceholder">
+                <div class="ph-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+                </div>
+                <p>Enter a URL above and press Preview to load a site</p>
+              </div>
+              <iframe id="previewFrame" title="Mobile website preview" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" style="display:none"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section id="stats" aria-label="Key statistics">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-num gradient-text" data-target="9">0</div>
+        <div class="stat-label">Device profiles supported</div>
+        <div class="stat-glow" style="background: #00e5ff;"></div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num gradient-text" data-target="100">0</div>
+        <div class="stat-label">% Free — no account required</div>
+        <div class="stat-glow" style="background: #7b61ff;"></div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num gradient-text" data-target="0">0</div>
+        <div class="stat-label">Installs needed</div>
+        <div class="stat-glow" style="background: #00ff88;"></div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num gradient-text" data-target="1">0</div>
+        <div class="stat-label">Second to start previewing</div>
+        <div class="stat-glow" style="background: #ff6b6b;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" aria-labelledby="features-heading">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag">✦ Features</span>
+      <h2 id="features-heading">Everything You Need for<br/><span class="gradient-text">Mobile Preview</span></h2>
+      <p>A powerful set of tools built for developers, designers, and QA engineers who care about mobile web quality.</p>
+    </div>
+    <div class="features-grid reveal">
+      <div class="feature-card">
+        <div class="fc-icon fc-icon-cyan" aria-hidden="true">📱</div>
+        <h3>Realistic Device Frames</h3>
+        <p>View websites inside pixel-accurate iPhone, Android, and tablet frames — not just a resized browser window. Understand the real mobile experience your users see.</p>
+        <span class="fc-badge">Popular</span>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon fc-icon-purple" aria-hidden="true">🔄</div>
+        <h3>Portrait & Landscape Mode</h3>
+        <p>Toggle device orientation with a single click to test both portrait and landscape layouts. Catch overflow issues and layout breaks in seconds.</p>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon fc-icon-green" aria-hidden="true">⚡</div>
+        <h3>Instant URL Loading</h3>
+        <p>Paste any public URL and see it rendered immediately inside the device frame. No waiting, no processing queue — just instant mobile preview.</p>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon fc-icon-yellow" aria-hidden="true">📐</div>
+        <h3>Multiple Viewport Sizes</h3>
+        <p>Switch between common device screen dimensions: 375×812 for iPhone 15 Pro, 360×800 for Galaxy S24, 1024×1366 for iPad Pro, and more.</p>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon fc-icon-red" aria-hidden="true">🎯</div>
+        <h3>Responsive Design Checker</h3>
+        <p>Identify exactly how your responsive breakpoints behave on real device widths. Spot broken layouts, overflowing text, and misaligned components fast.</p>
+        <span class="fc-badge">New</span>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon fc-icon-blue" aria-hidden="true">🛠</div>
+        <h3>Zero Setup Required</h3>
+        <p>Works entirely in your browser. No extensions, no apps, no accounts. Open MobileViewer, paste your URL, and start inspecting in under 10 seconds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section id="how" aria-labelledby="how-heading">
+  <div class="container">
+    <div class="steps-layout">
+      <div>
+        <div class="reveal">
+          <span class="tag tag-purple">✦ How It Works</span>
+          <h2 id="how-heading" style="margin-top:16px; margin-bottom:16px;">Three Steps to<br/><span class="gradient-text">Mobile Preview</span></h2>
+          <p style="color: var(--text2); margin-bottom:48px;">MobileViewer eliminates the friction of mobile testing. No emulators to configure. No physical devices required. Just a URL and a click.</p>
+        </div>
+        <div class="steps-list reveal">
+          <div class="step-item">
+            <div class="step-num" aria-label="Step 1">1</div>
+            <div class="step-content">
+              <h3>Paste Any URL</h3>
+              <p>Type or paste the full URL of any website — including localhost, staging environments, and live production URLs — into the address bar.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num" aria-label="Step 2">2</div>
+            <div class="step-content">
+              <h3>Select a Device</h3>
+              <p>Choose from iPhone 15 Pro, iPhone SE, Samsung Galaxy S24, Google Pixel 8, iPad Pro, or iPad Mini. Each profile loads the exact viewport dimensions and user-agent of that device.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num" aria-label="Step 3">3</div>
+            <div class="step-content">
+              <h3>Preview & Inspect</h3>
+              <p>Instantly see the website rendered inside a realistic device frame. Rotate the device, switch profiles, and scroll through the experience as a real mobile user would.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="steps-visual reveal" aria-hidden="true">
+        <div class="mock-phone">
+          <div class="mock-notch"></div>
+          <div class="mock-content">
+            <div style="height:14px; background: var(--surface2); border-radius:4px; width:40%; margin: 8px 0 16px;"></div>
+            <div class="mock-img-block"><div class="mock-img-inner">🌐</div></div>
+            <div class="mock-bar w90"></div>
+            <div class="mock-bar w80" style="margin-bottom:14px;"></div>
+            <div class="mock-grid">
+              <div class="mock-card"></div>
+              <div class="mock-card"></div>
+              <div class="mock-card"></div>
+              <div class="mock-card" style="background: linear-gradient(135deg, rgba(0,229,255,0.12), rgba(123,97,255,0.08));"></div>
+            </div>
+            <div class="mock-bar w60" style="margin-top:14px;"></div>
+            <div class="mock-bar w80"></div>
+          </div>
+        </div>
+        <div style="position:absolute; right:-80px; top:30px; display:flex; flex-direction:column; gap:12px;">
+          <div class="annot">
+            <div class="annot-dot" style="background: var(--accent);"></div>
+            375 × 812px
+          </div>
+          <div class="annot">
+            <div class="annot-dot" style="background: var(--green);"></div>
+            Portrait mode
+          </div>
+          <div class="annot">
+            <div class="annot-dot" style="background: var(--accent2);"></div>
+            iPhone 15 Pro
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Supported Devices Section -->
+<section id="devices" aria-labelledby="devices-heading">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag tag-green">✦ Supported Devices</span>
+      <h2 id="devices-heading">Simulate Every<br/><span class="gradient-text">Major Mobile Platform</span></h2>
+      <p>MobileViewer includes accurate viewport profiles for the world's most widely used smartphones and tablets.</p>
+    </div>
+    <div class="devices-grid reveal">
+      <div class="device-card" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})" role="button" tabindex="0" aria-label="Select iPhone 15 Pro">
+        <span class="dc-badge badge-pop">Popular</span>
+        <div class="dc-thumb">
+          <div class="dc-thumb-glow"></div>
+          📱
+        </div>
+        <h3>iPhone 15 Pro</h3>
+        <p>Apple's flagship smartphone with Dynamic Island and ProMotion display</p>
+        <div class="dc-specs">
+          <span class="dc-spec">393 × 852</span>
+          <span class="dc-spec">iOS Safari</span>
+          <span class="dc-spec">3x DPR</span>
+        </div>
+      </div>
+      <div class="device-card" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})" role="button" tabindex="0" aria-label="Select iPhone SE">
+        <div class="dc-thumb">
+          <div class="dc-thumb-glow" style="background: radial-gradient(ellipse, rgba(123,97,255,0.1), transparent 70%)"></div>
+          📲
+        </div>
+        <h3>iPhone SE (3rd Gen)</h3>
+        <p>Apple's compact, budget-friendly iPhone — widely used for responsive testing</p>
+        <div class="dc-specs">
+          <span class="dc-spec">375 × 667</span>
+          <span class="dc-spec">iOS Safari</span>
+          <span class="dc-spec">2x DPR</span>
+        </div>
+      </div>
+      <div class="device-card" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})" role="button" tabindex="0" aria-label="Select Samsung Galaxy S24">
+        <span class="dc-badge badge-new">New</span>
+        <div class="dc-thumb">
+          <div class="dc-thumb-glow" style="background: radial-gradient(ellipse, rgba(0,255,136,0.08), transparent 70%)"></div>
+          🤖
+        </div>
+        <h3>Samsung Galaxy S24</h3>
+        <p>Android's most popular flagship with edge-to-edge display and Chrome browser</p>
+        <div class="dc-specs">
+          <span class="dc-spec">360 × 780</span>
+          <span class="dc-spec">Chrome</span>
+          <span class="dc-spec">3x DPR</span>
+        </div>
+      </div>
+      <div class="device-card" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})" role="button" tabindex="0" aria-label="Select Google Pixel 8">
+        <div class="dc-thumb">
+          <div class="dc-thumb-glow" style="background: radial-gradient(ellipse, rgba(254,188,46,0.08), transparent 70%)"></div>
+          🎯
+        </div>
+        <h3>Google Pixel 8</h3>
+        <p>Google's reference Android device — ideal for testing stock Android web behavior</p>
+        <div class="dc-specs">
+          <span class="dc-spec">412 × 915</span>
+          <span class="dc-spec">Chrome</span>
+          <span class="dc-spec">2.6x DPR</span>
+        </div>
+      </div>
+      <div class="device-card" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})" role="button" tabindex="0" aria-label="Select iPad Pro">
+        <div class="dc-thumb">
+          <div class="dc-thumb-glow" style="background: radial-gradient(ellipse, rgba(56,189,248,0.1), transparent 70%)"></div>
+          📟
+        </div>
+        <h3>iPad Pro 12.9"</h3>
+        <p>Apple's largest tablet — essential for testing wide-screen mobile and tablet layouts</p>
+        <div class="dc-specs">
+          <span class="dc-spec">1024 × 1366</span>
+          <span class="dc-spec">iPadOS Safari</span>
+          <span class="dc-spec">2x DPR</span>
+        </div>
+      </div>
+      <div class="device-card" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})" role="button" tabindex="0" aria-label="Select iPad Mini">
+        <div class="dc-thumb">
+          <div class="dc-thumb-glow" style="background: radial-gradient(ellipse, rgba(255,107,107,0.08), transparent 70%)"></div>
+          📓
+        </div>
+        <h3>iPad Mini</h3>
+        <p>Apple's compact tablet, popular with users who prefer a smaller tablet form factor</p>
+        <div class="dc-specs">
+          <span class="dc-spec">768 × 1024</span>
+          <span class="dc-spec">iPadOS Safari</span>
+          <span class="dc-spec">2x DPR</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Use Cases Section -->
+<section id="usecases" aria-labelledby="usecases-heading">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag tag-purple">✦ Use Cases</span>
+      <h2 id="usecases-heading">Who Uses<br/><span class="gradient-text">MobileViewer?</span></h2>
+      <p>From solo developers to QA teams, MobileViewer serves everyone who cares about mobile web quality.</p>
+    </div>
+    <div class="usecases-layout reveal">
+      <div class="usecase-tabs" role="tablist" aria-label="Use cases">
+        <div class="usecase-tab active" onclick="switchTab(0)" role="tab" aria-selected="true" tabindex="0">
+          <h4>Web Developers</h4>
+          <p>Test responsive layouts during development without switching devices</p>
+        </div>
+        <div class="usecase-tab" onclick="switchTab(1)" role="tab" aria-selected="false" tabindex="0">
+          <h4>UI/UX Designers</h4>
+          <p>Preview designs and prototypes in real device contexts</p>
+        </div>
+        <div class="usecase-tab" onclick="switchTab(2)" role="tab" aria-selected="false" tabindex="0">
+          <h4>QA Engineers</h4>
+          <p>Verify mobile functionality across device profiles</p>
+        </div>
+        <div class="usecase-tab" onclick="switchTab(3)" role="tab" aria-selected="false" tabindex="0">
+          <h4>Digital Marketers</h4>
+          <p>Check landing pages and campaigns on mobile before launch</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="usecase-panel active" id="panel-0" role="tabpanel">
+          <div class="up-card">
+            <div class="up-icon">👨‍💻</div>
+            <h3>Built for Developers</h3>
+            <p>Rapidly iterate on responsive CSS without physical device hand-offs or slow emulator startup times. MobileViewer fits naturally into any web development workflow.</p>
+            <ul class="up-list">
+              <li>Test breakpoints against real device viewport widths</li>
+              <li>Preview localhost and staging URLs on mobile frames</li>
+              <li>Catch horizontal overflow and text-scaling bugs early</li>
+              <li>Validate touch target sizes and scroll behavior</li>
+              <li>Inspect how CSS variables and media queries behave</li>
+            </ul>
+          </div>
+        </div>
+        <div class="usecase-panel" id="panel-1" role="tabpanel">
+          <div class="up-card">
+            <div class="up-icon">🎨</div>
+            <h3>Designed for Designers</h3>
+            <p>Share realistic mobile previews of Figma exports, staging designs, and live prototypes with stakeholders — no development environment needed.</p>
+            <ul class="up-list">
+              <li>Preview live prototypes inside accurate device frames</li>
+              <li>Capture screenshots for client presentations</li>
+              <li>Compare desktop and mobile experiences side-by-side</li>
+              <li>Validate spacing, font sizing, and image scaling on mobile</li>
+              <li>Simulate real user screen dimensions from popular devices</li>
+            </ul>
+          </div>
+        </div>
+        <div class="usecase-panel" id="panel-2" role="tabpanel">
+          <div class="up-card">
+            <div class="up-icon">🔍</div>
+            <h3>Essential for QA</h3>
+            <p>Run quick cross-device smoke tests across multiple device profiles before every release. Reduce the need for physical device farms for initial checks.</p>
+            <ul class="up-list">
+              <li>Test regression scenarios on multiple device profiles quickly</li>
+              <li>Verify mobile UX on staging before pushing to production</li>
+              <li>Document mobile bugs with device-framed screenshots</li>
+              <li>Validate form inputs, modals, and navigation on small screens</li>
+              <li>Check third-party embeds and widgets in mobile context</li>
+            </ul>
+          </div>
+        </div>
+        <div class="usecase-panel" id="panel-3" role="tabpanel">
+          <div class="up-card">
+            <div class="up-icon">📊</div>
+            <h3>Perfect for Marketers</h3>
+            <p>Over 60% of web traffic comes from mobile. Verify your landing pages, campaigns, and content experiences look perfect on the devices your audience actually uses.</p>
+            <ul class="up-list">
+              <li>Preview landing pages on iPhone and Android before launch</li>
+              <li>Check email campaign CTAs render correctly on mobile</li>
+              <li>Inspect mobile ad placements and banners in context</li>
+              <li>Validate mobile checkout flows before campaigns go live</li>
+              <li>Share mobile previews with team members for approval</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section id="faq" aria-labelledby="faq-heading">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag">✦ FAQ</span>
+      <h2 id="faq-heading">Common Questions<br/><span class="gradient-text">Answered</span></h2>
+    </div>
+
+    <div class="faq-list reveal">
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span itemprop="name">What is MobileViewer and how does it work?</span>
+          <div class="faq-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <span itemprop="text">MobileViewer is a free browser-based tool that renders any public URL inside a simulated mobile device frame. You paste a URL, select a device profile, and the page loads inside a visual phone or tablet shell — showing you exactly how it appears at that device's viewport dimensions. It uses an iframe with the target device's width and height, giving you an accurate visual representation of the mobile layout.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span itemprop="name">Can I test my localhost or staging server with MobileViewer?</span>
+          <div class="faq-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <span itemprop="text">Yes — you can enter any URL including http://localhost:3000 or staging URLs like https://staging.yourdomain.com. Since MobileViewer runs entirely in your browser, your local server just needs to be accessible from the same machine. Note that sites served over HTTP on localhost are loadable; HTTPS is required for publicly hosted staging environments due to browser mixed-content rules.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span itemprop="name">Why won't some websites load in the MobileViewer?</span>
+          <div class="faq-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <span itemprop="text">Some websites block embedding inside iframes using the X-Frame-Options or Content-Security-Policy HTTP headers. This is a security feature many websites use, not a limitation of MobileViewer itself. Common sites that block embedding include Google, Facebook, and Twitter. However, most personal websites, portfolios, startup landing pages, and custom-built sites will load without issue.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span itemprop="name">Is MobileViewer the same as browser DevTools responsive mode?</span>
+          <div class="faq-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <span itemprop="text">MobileViewer complements DevTools but serves a different purpose. DevTools responsive mode is a developer debugging environment embedded in your browser. MobileViewer provides a shareable, visual, context-rich preview inside a realistic device shell — ideal for non-technical stakeholders, designers, and quick checks. You can share a link showing a URL in a device frame without asking the recipient to open DevTools.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span itemprop="name">Does MobileViewer simulate actual touch events or mobile browsers?</span>
+          <div class="faq-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <span itemprop="text">MobileViewer simulates the visual viewport of mobile devices by applying the device's screen dimensions. It shows the layout as it would appear at that screen size. It does not replicate actual touch event APIs, mobile browser rendering engines, or hardware-specific behaviors — for those deep tests, physical devices or device farms are recommended. For layout and responsive CSS testing, MobileViewer is highly accurate and fast.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span itemprop="name">Is my data or browsing private when using MobileViewer?</span>
+          <div class="faq-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <span itemprop="text">MobileViewer runs entirely client-side in your browser. The URLs you enter are not sent to any server — the iframe loads the target website directly from your browser, just like typing a URL into a new tab. No URL history, user data, or browsing sessions are stored or transmitted to MobileViewer's servers.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section id="cta" aria-labelledby="cta-heading">
+  <div class="cta-glow" aria-hidden="true"></div>
+  <div class="container">
+    <div class="reveal">
+      <span class="tag" style="margin-bottom:24px; display:inline-flex;">✦ Start Now — It's Free</span>
+      <h2 id="cta-heading">Ready to View Any Site<br/><span class="gradient-text">on Mobile?</span></h2>
+      <p>No account. No install. Just paste your URL and start previewing in seconds.</p>
+      <div class="cta-input-group">
+        <input type="url" class="cta-input" id="ctaUrlInput" placeholder="Paste a URL to preview..." aria-label="Enter URL for mobile preview" />
+        <button class="btn btn-primary" onclick="launchFromCta()" style="white-space:nowrap;">
+          Preview Now
+        </button>
+      </div>
+      <p style="font-size:0.8rem; color: var(--text3);">Works with any public URL · No login required · Free forever</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="logo" aria-label="MobileViewer home">
+          <div class="logo-icon">
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="1" width="12" height="18" rx="3" stroke="black" stroke-width="2"/>
+              <circle cx="10" cy="16" r="1" fill="black"/>
+            </svg>
+          </div>
+          MobileViewer
+        </a>
+        <p>A free, instant mobile device simulator for previewing any URL inside realistic device frames. Built for developers, designers, and QA teams.</p>
+        <div style="margin-top:20px; display:flex; gap:10px;">
+          <div class="fbadge" style="background:rgba(0,229,255,0.1); color:var(--accent); border:1px solid rgba(0,229,255,0.2);">Free</div>
+          <div class="fbadge" style="background:rgba(0,255,136,0.1); color:var(--green); border:1px solid rgba(0,255,136,0.2);">No Account</div>
+          <div class="fbadge" style="background:rgba(123,97,255,0.1); color:var(--accent2); border:1px solid rgba(123,97,255,0.2);">Instant</div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Tool</h5>
+        <a href="#tool">Mobile Viewer</a>
+        <a href="#devices">Supported Devices</a>
+        <a href="#features">Features</a>
+        <a href="#how">How It Works</a>
+      </div>
+      <div class="footer-col">
+        <h5>Use Cases</h5>
+        <a href="#usecases">Developers</a>
+        <a href="#usecases">Designers</a>
+        <a href="#usecases">QA Testing</a>
+        <a href="#usecases">Marketing</a>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <a href="#faq">FAQ</a>
+        <a href="#features">Changelog</a>
+        <a href="#faq">Documentation</a>
+        <a href="mailto:hello@mobileviewer.vercel.app">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 MobileViewer · <a href="https://mobileviewer.vercel.app" style="color:var(--text3);">mobileviewer.vercel.app</a> · All rights reserved.</p>
+      <p style="color: var(--text3);">Built for the web, by the web 🌐</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── DEVICE CONFIG ──
+  const devices = {
+    iphone15: { width: 390, height: 844, label: 'iPhone 15 Pro', ua: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1' },
+    iphonese: { width: 375, height: 667, label: 'iPhone SE', ua: 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15' },
+    pixel:    { width: 412, height: 915, label: 'Pixel 8', ua: 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 Chrome/120.0.0.0 Mobile Safari/537.36' },
+    galaxy:   { width: 360, height: 780, label: 'Galaxy S24', ua: 'Mozilla/5.0 (Linux; Android 14; SM-S921B) AppleWebKit/537.36 Chrome/120.0.0.0 Mobile Safari/537.36' },
+    ipad:     { width: 1024, height: 1366, label: 'iPad Pro', ua: 'Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1' },
+  };
+
+  let currentDevice = 'iphone15';
+  let isLandscape = false;
+
+  function setDevice(device, btn) {
+    currentDevice = device;
+    document.querySelectorAll('.device-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
+    btn.classList.add('active');
+    btn.setAttribute('aria-pressed', 'true');
+    isLandscape = false;
+    document.getElementById('phoneFrame').className = 'phone-frame device-' + device;
+    updateIframeSize();
+  }
+
+  function toggleLandscape() {
+    if (currentDevice === 'ipad') return;
+    isLandscape = !isLandscape;
+    const frame = document.getElementById('phoneFrame');
+    if (isLandscape) { frame.classList.add('landscape'); }
+    else { frame.classList.remove('landscape'); }
+    updateIframeSize();
+  }
+
+  function updateIframeSize() {
+    const iframe = document.getElementById('previewFrame');
+    const d = devices[currentDevice];
+    if (!d) return;
+    if (isLandscape && currentDevice !== 'ipad') {
+      iframe.style.width = d.height + 'px';
+      iframe.style.height = d.width + 'px';
+    } else {
+      iframe.style.width = d.width + 'px';
+      iframe.style.height = d.height + 'px';
+    }
+  }
+
+  function loadURL() {
+    let url = document.getElementById('urlInput').value.trim();
+    if (!url) return;
+    if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+
+    const iframe = document.getElementById('previewFrame');
+    const placeholder = document.getElementById('phonePlaceholder');
+    const spinner = document.getElementById('loadSpinner');
+
+    spinner.style.display = 'block';
+    placeholder.style.display = 'none';
+    iframe.style.display = 'none';
+
+    iframe.src = url;
+    updateIframeSize();
+
+    iframe.onload = () => {
+      spinner.style.display = 'none';
+      iframe.style.display = 'block';
+    };
+    iframe.onerror = () => {
+      spinner.style.display = 'none';
+      placeholder.style.display = 'flex';
+      placeholder.querySelector('p').textContent = 'Could not load this URL. It may block embedding (X-Frame-Options).';
+    };
+    setTimeout(() => {
+      if (spinner.style.display !== 'none') {
+        spinner.style.display = 'none';
+        iframe.style.display = 'block';
+      }
+    }, 3000);
+  }
+
+  document.getElementById('urlInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') loadURL();
+  });
+
+  function launchFromCta() {
+    const url = document.getElementById('ctaUrlInput').value.trim();
+    if (url) {
+      document.getElementById('urlInput').value = url;
+      document.getElementById('tool').scrollIntoView({ behavior: 'smooth' });
+      setTimeout(loadURL, 600);
+    } else {
+      document.getElementById('tool').scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  // ── FAQ ──
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  // ── USE CASE TABS ──
+  function switchTab(idx) {
+    document.querySelectorAll('.usecase-tab').forEach((t,i) => {
+      t.classList.toggle('active', i === idx);
+      t.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+    });
+    document.querySelectorAll('.usecase-panel').forEach((p,i) => {
+      p.classList.toggle('active', i === idx);
+    });
+  }
+
+  // ── SCROLL REVEAL ──
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ── COUNTER ANIMATION ──
+  function animateCounter(el, target, suffix = '') {
+    const duration = 1600;
+    const start = performance.now();
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(eased * target) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target + suffix;
+    };
+    requestAnimationFrame(step);
+  }
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const target = parseInt(e.target.dataset.target);
+        animateCounter(e.target, target, target === 1 ? '' : '');
+        counterObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+
+  // ── MOBILE MENU ──
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.add('open');
+    document.getElementById('hamburger').setAttribute('aria-expanded','true');
+  });
+  document.getElementById('menuClose').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('hamburger').setAttribute('aria-expanded','false');
+  });
+  document.querySelectorAll('.mobile-menu a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.remove('open');
+    });
+  });
+
+  // ── DEVICE CARD KEYBOARD ──
+  document.querySelectorAll('.device-card[tabindex]').forEach(card => {
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') card.click(); });
+  });
+
+  // ── USECASE TABS KEYBOARD ──
+  document.querySelectorAll('.usecase-tab').forEach((tab, i) => {
+    tab.addEventListener('keydown', e => { if (e.key === 'Enter') switchTab(i); });
+  });
+</script>
+</body>
+</html>
